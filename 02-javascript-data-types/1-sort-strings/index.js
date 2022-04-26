@@ -5,9 +5,11 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
+  if (param !== 'asc' && param !== 'desc') {
+    throw new SyntaxError(`Wrong parameter: "${param}". Method only allows "asc" and "desc".`);
+  }
+
   return [...arr].sort((item1, item2) =>
-    param === 'asc'
-      ? item1.localeCompare(item2, 'ru', { caseFirst: 'upper' })
-      : item2.localeCompare(item1, 'ru', { caseFirst: 'upper' })
+    (param === 'asc' ? 1 : -1) * item1.localeCompare(item2, ['ru', 'en'], { caseFirst: 'upper' })
   );
 }
