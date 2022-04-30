@@ -8,7 +8,7 @@ export function trimSymbols(string, size) {
   if (string === undefined) return undefined;
   if (size === 0) return '';
 
-  let newString = "";
+  let newString = [];
   let currentAmount = 0;
   let currentSymbol = string[0];
 
@@ -22,8 +22,8 @@ export function trimSymbols(string, size) {
     }
 
     currentSymbol = symbol;
-    newString += currentSymbol;
+    newString.push(currentSymbol);
   }
 
-  return newString;
+  return newString.join('');
 }
