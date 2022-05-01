@@ -5,8 +5,8 @@
  */
 export function createGetter(path) {
   const props = path.split(".");
-  
-  function findProperty(obj) {  
+
+  return (obj) => {
     let currentObj = obj;
 
     for (let prop of props) {
@@ -15,7 +15,5 @@ export function createGetter(path) {
     }
 
     return currentObj;
-  }
-  
-  return findProperty;
+  };
 }
