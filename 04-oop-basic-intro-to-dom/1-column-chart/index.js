@@ -1,14 +1,26 @@
 export default class ColumnChart {
   chartHeight = 50;
 
-  constructor(obj) {
-    this.data = obj?.data ?? [];
-    this.label = obj?.label ?? "";
-    this.value = obj?.value ?? 0;
-    this.link = obj?.link;
-    this.formatHeading = obj?.formatHeading;
+  constructor({ data = [], label = "", value = 0, link, formatHeading } = {}) {
+    this.data = data;
+    this.label = label;
+    this.value = value;
+    this.link = link;
+    this.formatHeading = formatHeading;
 
     this.render();
+  }
+
+  getChartElement() {
+    const chartElement = document.createElement("div");
+    chartElement.style = `--chart-height: ${this.chartHeight}`;
+    chartElement.classList.add("column-chart");
+
+    if (!this.data || this.data.length === 0)
+      chartElement.classList.add("column-chart_loading");
+
+    chartElement.innerHTML = this.getTemplate();
+    return chartElement;
   }
 
   getChartColumnsTemplate() {
@@ -36,34 +48,24 @@ export default class ColumnChart {
     const viewAllLink = this.link
       ? `<a class="column-chart__link" href="${this.link}">View all</a>`
       : ``;
-    
-    const chartLoadingStyle = !this.data || this.data.length === 0
-      ? `column-chart_loading`
-      : ``;
 
     return `
-        <div class="dashboard__chart_${this.label}">
-            <div class="column-chart ${chartLoadingStyle}" style="--chart-height: 
-            ${this.chartHeight}">
-                <div class="column-chart__title">
-                Total ${this.label}
-                ${viewAllLink}
-                </div>
-                <div class="column-chart__container">
-                <div data-element="header" class="column-chart__header">
-                ${formattedValue}</div>
-                <div data-element="body" class="column-chart__chart">
-                    ${this.getChartColumnsTemplate()}
-                </div>
-                </div>
-            </div>
-        </div>`;
+      <div class="column-chart__title">
+        Total ${this.label}
+        ${viewAllLink}
+      </div>
+      <div class="column-chart__container">
+        <div data-element="header" class="column-chart__header">
+          ${formattedValue}
+        </div>
+        <div data-element="body" class="column-chart__chart">
+          ${this.getChartColumnsTemplate()}
+        </div>
+      </div>`;
   }
 
   render() {
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = this.getTemplate();
-    this.element = wrapper;
+    this.element = this.getChartElement();
   }
 
   update(data) {

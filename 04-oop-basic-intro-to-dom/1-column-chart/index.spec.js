@@ -107,7 +107,7 @@ describe('oop-basic-intro-to-dom/column-chart', () => {
     columnChart = new ColumnChart();
     //document.body.append(columnChart);
 
-    expect(columnChart.element.querySelector('.column-chart')).toHaveClass('column-chart_loading');
+    expect(columnChart.element).toHaveClass('column-chart_loading');
   });
 
   it('should have ability to be removed', () => {
