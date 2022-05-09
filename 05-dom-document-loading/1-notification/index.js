@@ -11,8 +11,8 @@ export default class NotificationMessage {
 
     targetElement.append(this.element);
 
-    if (this.duration > 0) 
-      setTimeout(this.remove, this.duration);
+    if (this.duration > 0)
+      setTimeout(() => {this.remove();}, this.duration);
   }
 
   createNotificationElement() {
@@ -24,10 +24,7 @@ export default class NotificationMessage {
   }
 
   remove() {
-    let notificationElement = document.querySelector(".notification");
-    
-    if (notificationElement) 
-      notificationElement.remove();
+    this.element?.remove();
   }
 
   destroy() {
