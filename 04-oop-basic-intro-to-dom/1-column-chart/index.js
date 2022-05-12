@@ -1,4 +1,4 @@
-const noop = (p) => {return p};
+const noop = p => p;
 
 export default class ColumnChart {
   chartHeight = 50;
