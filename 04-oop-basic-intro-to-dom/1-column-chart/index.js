@@ -1,7 +1,9 @@
+const noop = p => p;
+
 export default class ColumnChart {
   chartHeight = 50;
 
-  constructor({ data = [], label = "", value = 0, link, formatHeading } = {}) {
+  constructor({ data = [], label = "", value = 0, link, formatHeading = noop} = {}) {
     this.data = data;
     this.label = label;
     this.value = value;
@@ -74,8 +76,7 @@ export default class ColumnChart {
   }
 
   remove() {
-    this.data = [];
-    this.render();
+    this.element.remove();
   }
 
   destroy() {
@@ -84,5 +85,7 @@ export default class ColumnChart {
     this.value = null;
     this.link = null;
     this.formatHeading = null;
+
+    this.remove();
   }
 }
