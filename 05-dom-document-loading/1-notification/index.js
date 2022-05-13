@@ -18,7 +18,7 @@ export default class NotificationMessage {
     targetElement.append(NotificationMessage.#element);
 
     if (this.duration > 0)
-      NotificationMessage.#timeoutId = setTimeout(() => {this.remove();}, this.duration - 10);
+      NotificationMessage.#timeoutId = setTimeout(() => this.remove(), this.duration - 10);
   }
 
   createNotificationElement() {
