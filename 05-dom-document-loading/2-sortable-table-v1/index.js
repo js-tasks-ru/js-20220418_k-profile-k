@@ -39,9 +39,6 @@ export default class SortableTable {
   }
 
   sort(field, order) {
-    this.currentFieldSort = field;
-    this.currentOrderSort = order;
-
     if (order !== 'asc' && order !== 'desc') {
       throw new SyntaxError(
         `Wrong parameter: "${order}". Method only allows "asc" and "desc".`
@@ -66,11 +63,14 @@ export default class SortableTable {
       throw new SyntaxError(`Field "${field}" doesn't support sorting".`);
     }
 
+    this.currentFieldSort = field;
+    this.currentOrderSort = order;
+
     this.data.sort((item1, item2) =>
       sortFunction(item1[field], item2[field], order)
     );
 
-    this.render(field, order);
+    this.render();
   }
 
   sortText(item1, item2, order) {
