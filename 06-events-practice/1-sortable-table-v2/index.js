@@ -101,7 +101,7 @@ export default class SortableTable {
       const header = this.headerConfig[i];
       const headerElement = headerElements[i];
 
-      headerElement.attributes["data-order"].nodeValue =
+      headerElement.dataset.order =
         header.id === this.currentFieldSort ? this.currentOrderSort : "";
     }
 

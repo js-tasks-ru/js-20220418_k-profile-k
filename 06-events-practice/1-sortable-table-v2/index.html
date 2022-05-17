@@ -68,12 +68,12 @@
       element = element.parentNode;
     }
 
-    const dataSortable = element.attributes["data-sortable"]?.value;
+    const dataSortable = element.dataset.sortable;
 
     if(!element.classList.contains('sortable-table__cell') || dataSortable !== 'true') return;
     
-    const field = element.attributes["data-id"]?.value;
-    const order = element.attributes["data-order"]?.value; 
+    const field = element.dataset.id;
+    const order = element.dataset.order; 
     
     sortableTable.sort(field, order === 'asc' ? 'desc' : 'asc');
   });
