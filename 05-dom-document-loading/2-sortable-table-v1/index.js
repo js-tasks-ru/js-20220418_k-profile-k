@@ -70,7 +70,38 @@ export default class SortableTable {
       sortFunction(item1[field], item2[field], order)
     );
 
-    this.render();
+    this.renderSubElements();
+  }
+
+  renderSubElements() {
+    const headerElements = this.subElements["header"].children;
+    
+    for (let i = 0; i < this.headerConfig.length; i++) {
+      const header = this.headerConfig[i];
+      const headerElement = headerElements[i];
+
+      headerElement.dataset.order =
+        header.id === this.currentFieldSort ? this.currentOrderSort : "";
+    }
+
+    const bodyElements = this.subElements["body"].children;
+
+    for (let i = 0; i < bodyElements.length; i++) {
+      const bodyElement = bodyElements[i];
+      
+      for (let j = 0; j < this.headerConfig.length; j++) {
+        const header = this.headerConfig[j];
+        const column = bodyElement.children[j];
+        
+        bodyElement.href = `/products/${this.data[i].id}`;
+
+        if (header.template) {
+          column.outerHTML = header.template(this.data[i][header.id]);
+        } else {
+          column.textContent = this.data[i][header.id];
+        }
+      }
+    }
   }
 
   sortText(item1, item2, order) {

@@ -59,5 +59,23 @@
   });
 
   root.append(sortableTable.element);
+
+  const header = document.querySelector("[data-element=header]");
+  header.addEventListener('click', (event) => {
+    let element = event.target;
+
+    if(element.nodeName === 'SPAN') {
+      element = element.parentNode;
+    }
+
+    const dataSortable = element.dataset.sortable;
+
+    if(!element.classList.contains('sortable-table__cell') || dataSortable !== 'true') return;
+    
+    const field = element.dataset.id;
+    const order = element.dataset.order; 
+    
+    sortableTable.sort(field, order === 'asc' ? 'desc' : 'asc');
+  });
 </script>
 </body>
