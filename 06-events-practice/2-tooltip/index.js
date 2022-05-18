@@ -1,27 +1,27 @@
 class Tooltip {
   static instance;
 
-  pointerOver = function (event) {
+  pointerOver = event => {
     const tooltipText = event.target.dataset.tooltip;
     if (!tooltipText) return;
 
-    Tooltip.instance.render(tooltipText);
+    this.render(tooltipText);
   }
 
-  pointerOut = function (event) {
-    if (!Tooltip.instance.active || !Tooltip.instance.element) return;
+  pointerOut = event => {
+    if (!this.active || !this.element) return;
 
     const tooltipText = event.target.dataset.tooltip;
     if (!tooltipText) return;
 
-    Tooltip.instance.hide();
+    this.hide();
   }
 
-  pointerMove = function (event) {
-    if (!Tooltip.instance.active || !Tooltip.instance.element) return;
+  pointerMove = event => {
+    if (!this.active || !this.element) return;
 
-    Tooltip.instance.element.style.left = event.clientX + 10 + "px";
-    Tooltip.instance.element.style.top = event.clientY + 10 + "px";
+    this.element.style.left = event.clientX + 10 + "px";
+    this.element.style.top = event.clientY + 10 + "px";
   }
 
   constructor() {
