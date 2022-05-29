@@ -95,7 +95,7 @@ export default class SortableTable {
   }
 
   renderSubElements() {
-    const headerElements = this.subElements["header"].children;
+    const headerElements = this.subElements.header.children;
 
     for (let i = 0; i < this.headerConfig.length; i++) {
       const header = this.headerConfig[i];
@@ -105,7 +105,7 @@ export default class SortableTable {
         header.id === this.currentFieldSort ? this.currentOrderSort : "";
     }
 
-    const bodyElements = this.subElements["body"].children;
+    const bodyElements = this.subElements.body.children;
 
     for (let i = 0; i < bodyElements.length; i++) {
       const bodyElement = bodyElements[i];
